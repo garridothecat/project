@@ -14,7 +14,7 @@ Welcome to the Pokedex website! This is your one-stop destination for exploring 
   - [Installation](#installation)
   - [Usage](#usage)
   - [Contributing](#contributing)
-  - [License](#license)
+
 
 ## Getting Started
 
