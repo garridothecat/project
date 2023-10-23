@@ -1,0 +1,795 @@
+@import url("https://fonts.googleapis.com/css2?family=Raleway:wght@100;200;300;400;500;700&display=swap");
+.main-container {
+  position: relative;
+  max-width: 100vw;
+  overflow: hidden;
+  height: 100vh;
+}
+
+.app {
+  z-index: 1;
+  background: rgba(4, 6, 20, 0.85);
+  box-shadow: 0 8px 32px 0 rgba(6, 8, 28, 0.37);
+  backdrop-filter: blur(50px);
+  -webkit-backdrop-filter: blur(13px);
+  border: 1px solid rgba(23, 20, 20, 0.18);
+  height: 100vh;
+  width: 100vw;
+  display: grid;
+  grid-template-rows: 10vh auto 10vh;
+  grid-template-columns: 1fr;
+}
+.app .content {
+  margin: 0 5rem;
+  border: 0.5px solid rgba(255, 255, 255, 0.203);
+  border-top: none;
+  border-bottom: none;
+  height: 80vh;
+}
+
+.page {
+  height: 100%;
+  width: 100%;
+}
+
+button {
+  cursor: pointer;
+}
+
+::-webkit-scrollbar {
+  background-color: transparent;
+  width: 0.4rem;
+}
+::-webkit-scrollbar-thumb {
+  background-color: rgba(219, 219, 219, 0.557);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Raleway", sans-serif;
+  background-color: black;
+}
+
+#root {
+  --accent-color-dark: color.scale($accent-color, $lightness: -30%);
+}
+
+.background {
+  z-index: -1;
+  position: absolute;
+  max-height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 2rem;
+}
+.background img {
+  max-inline-size: 100%;
+  block-size: auto;
+  height: 20rem;
+}
+
+.details {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  color: white;
+  padding: 1rem;
+  width: 25rem;
+  text-transform: uppercase;
+  background: linear-gradient(rgba(255, 93, 93, 0) 20.5px, transparent 1%) center, rgba(255, 255, 255, 0.051);
+}
+.details::before {
+  height: 0.3rem;
+  width: 9rem;
+  content: "";
+  background-color: var(--accent-color);
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.details .name {
+  margin-bottom: 1rem;
+}
+.details button {
+  position: absolute;
+  right: 1rem;
+  bottom: -2rem;
+  padding: 0.8rem 0.8rem;
+  background-color: transparent;
+  border: 0.1rem solid var(--accent-color);
+  outline: none;
+  color: white;
+  text-transform: uppercase;
+  font-weight: 700;
+  letter-spacing: 0.1rem;
+}
+
+.stats {
+  position: absolute;
+  left: 1rem;
+  bottom: 8rem;
+}
+.stats ul {
+  list-style-type: none;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.stats ul li {
+  color: white;
+  text-align: right;
+  text-transform: uppercase;
+  letter-spacing: 0.1rem;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 1rem;
+}
+.stats ul li progress {
+  transition: 2s ease-in-out;
+  width: 0;
+  height: 100%;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+       appearance: none;
+}
+.stats ul li progress::-webkit-progress-bar {
+  border-radius: 1rem;
+  height: 0.3rem;
+  background-color: transparent;
+}
+.stats ul li progress::-webkit-progress-value {
+  border-radius: 1rem;
+  background-color: var(--accent-color);
+}
+
+.battle-stats {
+  position: absolute;
+  bottom: 3rem;
+  right: 2rem;
+  color: white;
+  padding: 1rem;
+  width: 30rem;
+  background: linear-gradient(rgba(255, 93, 93, 0) 20.5px, transparent 1%) center, rgba(255, 255, 255, 0.051);
+}
+.battle-stats ul {
+  list-style-type: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  letter-spacing: 0.1rem;
+}
+.battle-stats ul li {
+  display: grid;
+  grid-template-columns: max-content 80%;
+  gap: 0.5rem;
+}
+.battle-stats::before {
+  height: 0.3rem;
+  width: 9rem;
+  content: "";
+  background-color: var(--accent-color);
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.battle-stats .name {
+  margin-bottom: 1rem;
+}
+.battle-stats .add-pokemon {
+  position: absolute;
+  right: -1rem;
+  bottom: -2rem;
+  padding: 0.8rem 0.8rem;
+  background-color: transparent;
+  border: 0.1rem solid var(--accent-color);
+  outline: none;
+  color: white;
+  text-transform: uppercase;
+  font-weight: 700;
+  letter-spacing: 0.1rem;
+  cursor: pointer;
+  transition: 0.2s ease-in-out;
+}
+.battle-stats .add-pokemon:hover {
+  background-color: var(--accent-color);
+}
+
+.loader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.compare-container {
+  height: 100%;
+  width: 100%;
+}
+.compare-container .empty {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 3rem;
+  height: 100%;
+}
+.compare-container .empty button {
+  cursor: pointer;
+  border-radius: 10rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  background-color: var(--accent-color);
+  border: none;
+}
+.compare-container .empty button svg {
+  font-size: 5rem;
+  color: whitesmoke;
+}
+.compare-container .empty h3 {
+  color: white;
+  text-transform: uppercase;
+  letter-spacing: 0.3rem;
+}
+
+.compare-element {
+  height: 100%;
+  display: grid;
+  grid-template-rows: 90% 10%;
+  grid-template-columns: 1fr;
+}
+.compare-element .compare-info {
+  color: white;
+  text-transform: uppercase;
+  letter-spacing: 0.1rem;
+  width: 100%;
+  display: grid;
+  grid-template-rows: 40% 60%;
+}
+.compare-element .compare-info .compare-details {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.compare-element .compare-info .compare-details .compare-image {
+  height: 10rem;
+}
+.compare-element .compare-action-buttons {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  width: 100%;
+  height: 100%;
+}
+.compare-element .compare-action-buttons button {
+  font-size: 1.2rem;
+  font-weight: 400;
+  text-transform: uppercase;
+  border: none;
+  color: rgb(228, 228, 228);
+  letter-spacing: 0.1rem;
+  cursor: pointer;
+  border: 1px solid rgba(255, 255, 255, 0.647);
+  background-color: transparent;
+  transition: 0.3s ease-in-out;
+}
+.compare-element .compare-action-buttons button:nth-of-type(1):hover {
+  background-color: #1f51ff;
+  border-color: #1f51ff;
+}
+.compare-element .compare-action-buttons button:nth-of-type(2):hover {
+  background-color: #27af0f;
+  border-color: #27af0f;
+}
+.compare-element .compare-action-buttons button:nth-of-type(3):hover {
+  background-color: #e21b5a;
+  border-color: #e21b5a;
+}
+
+.pokemon-types-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: flex-start;
+  max-height: 100%;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  padding-bottom: 1rem;
+}
+.pokemon-types-container .pokemon-types {
+  display: grid;
+  grid-template-columns: 25% 75%;
+  gap: 2rem;
+  width: 100%;
+}
+.pokemon-types-container .pokemon-types .pokemon-type-title {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+.pokemon-types-container .pokemon-types .pokemon-type-icons {
+  display: flex;
+  gap: 1rem;
+  width: 100%;
+  flex-wrap: wrap;
+}
+.pokemon-types-container .pokemon-types .pokemon-type-icons .pokemon-type {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 1rem;
+}
+.pokemon-types-container .pokemon-types .pokemon-type-icons .pokemon-type .pokemon-type-image {
+  height: 3rem;
+  width: 3rem;
+}
+
+.login {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+}
+.login-btn {
+  background-color: transparent;
+  color: white;
+  font-size: 1.5rem;
+  text-transform: uppercase;
+  padding: 1rem;
+  border: 5px solid white;
+  cursor: pointer;
+  font-weight: 700;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  transition: 0.4s ease-in-out;
+}
+.login-btn svg {
+  font-size: 3rem;
+}
+.login-btn:hover {
+  border-top-color: red;
+  border-left-color: yellow;
+  border-right-color: blue;
+  border-bottom-color: green;
+  border-radius: 3rem;
+  border-width: 10px;
+}
+
+.pokemon-card-grid-container {
+  max-height: 80vh;
+  overflow-y: scroll;
+  color: white;
+  text-transform: uppercase;
+}
+
+.pokemon-card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 4rem;
+  margin: 4rem;
+  margin-top: 2rem;
+}
+.pokemon-card-grid .pokemon-card {
+  width: 250px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background-color: rgba(255, 255, 255, 0.125);
+  border-radius: 1rem;
+  padding: 1rem;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  position: relative;
+}
+.pokemon-card-grid .pokemon-card svg {
+  transition: 0.3s ease-in-out;
+}
+.pokemon-card-grid .pokemon-card svg:hover {
+  font-size: 2rem;
+}
+.pokemon-card-grid .pokemon-card-list {
+  position: absolute;
+  top: 0.7rem;
+  left: 0.8rem;
+  font-size: 1rem;
+  cursor: pointer;
+}
+.pokemon-card-grid .pokemon-card-list .trash {
+  color: #e21b5a;
+}
+.pokemon-card-grid .pokemon-card-list .plus {
+  color: #27af0f;
+}
+.pokemon-card-grid .pokemon-card-compare {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.8rem;
+  font-size: 1.3rem;
+  cursor: pointer;
+}
+.pokemon-card-grid .pokemon-card-compare svg {
+  color: #1f51ff;
+}
+.pokemon-card-grid .pokemon-card-title {
+  text-align: center;
+  cursor: pointer;
+  margin-top: 1rem;
+}
+.pokemon-card-grid .pokemon-card-image {
+  height: 10rem;
+  filter: drop-shadow(20px 10px 10px rgba(20, 18, 18, 0.5058823529));
+  cursor: pointer;
+}
+.pokemon-card-grid .pokemon-card-types {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(60px, 1fr));
+  gap: 1rem;
+}
+.pokemon-card-grid .pokemon-card-types-type {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 0.5rem;
+  gap: 0.4rem;
+}
+.pokemon-card-grid .pokemon-card-types-type-image {
+  height: 2rem;
+}
+.pokemon-card-grid .pokemon-card-types-type-text {
+  font-size: smaller;
+}
+
+nav {
+  display: grid;
+  grid-template-columns: 5rem auto 5rem;
+  border-bottom: 0.5px solid rgba(255, 255, 255, 0.203);
+}
+nav .data {
+  margin: 0px;
+  border: 0.5px solid rgba(255, 255, 255, 0.203);
+  border-top: none;
+  border-bottom: none;
+  padding: 0 20rem;
+}
+nav .data ul {
+  display: grid;
+  grid-template-columns: repeat(5, 20%);
+  height: 100%;
+  list-style-type: none;
+  z-index: 1;
+  position: relative;
+}
+nav .data ul a {
+  text-decoration: none;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 1px solid transparent;
+}
+nav .data ul a li {
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: 0.3s ease-in-out;
+  font-weight: 500;
+  letter-spacing: 0.2rem;
+}
+nav .block {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+nav .block svg {
+  color: white;
+  font-size: 2rem;
+  cursor: pointer;
+}
+nav .block img {
+  cursor: pointer;
+  height: 3rem;
+}
+
+:root {
+  --underline-height: 4px;
+  --transition-duration: 0.5s;
+}
+
+.underline {
+  z-index: 10;
+  height: calc(var(--underline-height) / 2);
+  mix-blend-mode: initial;
+}
+
+.underline {
+  display: block;
+  position: absolute;
+  z-index: 0;
+  bottom: 0;
+  left: 0;
+  height: var(--underline-height);
+  width: 20%;
+  background-color: var(--accent-color);
+  pointer-events: none;
+  transition: transform var(--transition-duration) ease-in-out;
+}
+.underline:nth-child(1) {
+  transition: calc(var(--transition-duration) * 0.8);
+}
+.underline:nth-child(2) {
+  transition: calc(var(--transition-duration) * 1.2);
+}
+
+.content {
+  display: flex;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.content {
+  background: linear-gradient(90deg, rgba(255, 93, 93, 0) 20.5px, transparent 1%) center, linear-gradient(rgba(255, 93, 93, 0) 20.5px, transparent 1%) center, rgba(255, 255, 255, 0.051);
+  background-size: 22px 22px;
+}
+
+footer {
+  display: grid;
+  grid-template-columns: 5rem auto 5rem;
+  border-top: 0.5px solid rgba(255, 255, 255, 0.203);
+}
+footer .block {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #e21b5a;
+}
+footer .block svg {
+  cursor: pointer;
+  font-size: 2.5rem;
+}
+footer .data {
+  margin: 0px;
+  border: 0.5px solid rgba(255, 255, 255, 0.203);
+  border-top: none;
+  border-bottom: none;
+}
+footer .data ul {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  height: 100%;
+  list-style-type: none;
+}
+footer .data ul li {
+  color: white;
+  text-transform: uppercase;
+  font-weight: 500;
+  letter-spacing: 0.2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: 0.3s ease-in-out;
+}
+footer .data ul li:hover {
+  background-color: var(--accent-color);
+}
+footer .data ul .active {
+  background-color: var(--accent-color);
+}
+
+.circle-container {
+  display: flex;
+  margin-top: 3rem;
+}
+.circle-container .outer-circle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 24rem;
+  width: 24rem;
+  border: 0.2rem solid var(--accent-color);
+  border-radius: 50rem;
+  position: relative;
+}
+.circle-container .inner-circle {
+  height: 20rem;
+  width: 20rem;
+  border: 0.3rem solid var(--accent-color);
+  border-radius: 40rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.circle-container .inner-circle img {
+  max-inline-size: 100%;
+  block-size: auto;
+  z-index: 100;
+  height: 17rem;
+}
+.circle-container .lines {
+  display: flex;
+  gap: 3rem;
+  position: absolute;
+}
+.circle-container .lines .line {
+  height: 28rem;
+  width: 0.3rem;
+  background-color: var(--accent-color);
+  transform: rotate(45deg);
+}
+
+.circle-container-2 .outer-circle {
+  border-color: #59591c;
+}
+.circle-container-2 .inner-circle {
+  border-color: #ffff33;
+}
+.circle-container-2 .lines .line {
+  background-color: #ffff33;
+}
+
+.circle-container-3 .outer-circle {
+  border-color: #833719;
+}
+.circle-container-3 .inner-circle {
+  border-color: #ff5f1f;
+}
+.circle-container-3 .lines .line {
+  background-color: #ff5f1f;
+}
+
+.search {
+  height: 100%;
+  width: 100%;
+  max-width: 100%;
+  color: white;
+  text-transform: uppercase;
+}
+.search .pokemon-searchbar {
+  background-color: rgba(255, 255, 255, 0.125);
+  outline: none;
+  border: none;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  width: 100%;
+  height: 9%;
+  color: white;
+  font-size: 1.3rem;
+  padding-left: 1rem;
+}
+.search .pokemon-searchbar::-webkit-input-placeholder {
+  color: rgba(255, 255, 255, 0.779);
+}
+
+.compare {
+  display: grid;
+  grid-template-columns: 49% 49%;
+  height: 100%;
+  width: 100%;
+  gap: 1rem;
+  padding: 1rem;
+}
+
+.profile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  color: white;
+  margin-top: 2rem;
+}
+.profile-text {
+  text-transform: uppercase;
+  letter-spacing: 0.2rem;
+}
+.profile h1 {
+  font-size: 4rem;
+}
+.profile-image {
+  height: 15rem;
+  border-radius: 10rem;
+  border: 0.3rem solid var(--accent-color);
+  padding: 1rem;
+}
+.profile-links {
+  display: flex;
+  gap: 2rem;
+  margin-top: 2rem;
+  cursor: pointer;
+}
+.profile-links a {
+  color: var(--accent-color);
+}
+.profile-links a svg {
+  font-size: 3rem;
+}
+
+.list {
+  height: 100%;
+  width: 100%;
+  max-width: 100%;
+  color: white;
+  text-transform: uppercase;
+}
+
+.pokemon-locations {
+  width: 100%;
+  height: 100%;
+}
+.pokemon-locations .pokemon-locations-list {
+  list-style-type: none;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-auto-rows: 150px;
+  gap: 1rem;
+  padding: 1rem;
+  width: 100%;
+  overflow-y: scroll;
+  height: 100%;
+}
+.pokemon-locations .pokemon-locations-list .pokemon-location {
+  height: 100%;
+  padding: 2rem;
+  font-size: x-large;
+  background-color: rgba(255, 255, 255, 0.125);
+  border-radius: 1rem;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  cursor: pointer;
+}
+
+.capable-moves {
+  width: 100%;
+  height: 100%;
+  overflow-y: scroll;
+}
+.capable-moves .capable-moves-title {
+  color: white;
+  text-transform: uppercase;
+  letter-spacing: 0.1rem;
+  padding: 1rem;
+}
+.capable-moves .capable-moves-list {
+  list-style-type: none;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-auto-rows: 150px;
+  gap: 1rem;
+  padding: 1rem;
+  width: 100%;
+  overflow-y: scroll;
+}
+.capable-moves .capable-moves-list .move {
+  height: 100%;
+  padding: 2rem;
+  font-size: x-large;
+  background-color: rgba(255, 255, 255, 0.125);
+  border-radius: 1rem;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  cursor: pointer;
+  text-transform: uppercase;
+}
+.capable-moves .ability .move {
+  background-color: var(--accent-color);
+}

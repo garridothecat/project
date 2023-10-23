@@ -1,0 +1,166 @@
+.blog {
+	&__wrapper {
+		margin: 0 auto;
+		max-width: 800px;
+		padding: 20px;
+		background-color: #f5f5f5;
+	}
+
+	&__header {
+		text-align: center;
+		margin-bottom: 20px;
+
+		h2 {
+			font-size: 24px;
+			a {
+				text-decoration: none;
+				color: #0077cc;
+				&:hover {
+					text-decoration: underline;
+				}
+			}
+		}
+	}
+
+	&__posts {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 20px;
+
+		.blog__post {
+			background-color: #fff;
+			border: 1px solid #ddd;
+			border-radius: 5px;
+			padding: 20px;
+			flex: 1;
+			transition: transform 0.2s;
+
+			h3 {
+				font-size: 18px;
+				margin-bottom: 10px;
+				color: #333;
+			}
+
+			p {
+				color: #666;
+			}
+
+			.blog__btn {
+				display: block;
+				text-align: center;
+				margin-top: 10px;
+				padding: 8px 16px;
+				border: none;
+				cursor: pointer;
+				text-decoration: none;
+				border-radius: 5px;
+				font-weight: bold;
+
+				&.update {
+					background-color: #009933;
+					color: #fff;
+
+					&:hover {
+						background-color: #007722;
+					}
+				}
+
+				&.delete {
+					background-color: #ff3333;
+					color: #fff;
+
+					&:hover {
+						background-color: #cc0000;
+					}
+				}
+			}
+
+			&:hover {
+				transform: translateY(-5px);
+			}
+		}
+	}
+
+	&__btn {
+		display: inline-block;
+		padding: 10px 20px;
+		text-align: center;
+		background-color: #0077cc;
+		color: #fff;
+		border: none;
+		border-radius: 5px;
+		text-decoration: none;
+		font-weight: bold;
+
+		&:hover {
+			background-color: #005599;
+		}
+	}
+}
+
+.contacts {
+	&__wrapper {
+		margin: 0 auto;
+		max-width: 600px;
+		padding: 20px;
+		background-color: #f5f5f5;
+	}
+
+	&__form {
+		background-color: #fff;
+		border: 1px solid #ddd;
+		border-radius: 5px;
+		padding: 20px;
+	}
+
+	&__input {
+		margin-bottom: 20px;
+
+		label {
+			display: block;
+			font-weight: bold;
+			margin-bottom: 5px;
+		}
+
+		input[type='text'],
+		textarea {
+			width: 100%;
+			padding: 10px;
+			border: 1px solid #ccc;
+			border-radius: 5px;
+			font-size: 16px;
+		}
+	}
+
+	&__btns {
+		display: flex;
+		justify-content: space-between;
+
+		.form__btns {
+			&.update,
+			&.submit {
+				background-color: #0077cc;
+				color: #fff;
+
+				&:hover {
+					background-color: #005599;
+				}
+			}
+
+			&.delete,
+			&.cancel {
+				background-color: #ff3333;
+				color: #fff;
+
+				&:hover {
+					background-color: #cc0000;
+				}
+			}
+		}
+	}
+
+	h3 {
+		font-size: 24px;
+		margin-bottom: 20px;
+	}
+}
